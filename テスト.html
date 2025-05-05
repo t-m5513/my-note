@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>努力が楽しくなる方法 - アンドリュー・ヒューバーマン</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Yomogi&family=Zen+Kurenaido&display=swap');
+
+    :root {
+        --fashion-1: #593C47;
+        --fashion-2: #F2E63D;
+        --fashion-3: #F2C53D;
+        --fashion-4: #F25C05;
+        --fashion-5: #F24405;
+        --bg-color: #FFFCF7;
+        --text-color: #334155;
+        --heading-color: #1e40af;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* === ここから変更した部分 === */
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: 'Zen Kurenaido', sans-serif;
+        line-height: 1.4;
+        /* width: 595px; ← 幅の固定をやめた */
+        max-width: 1200px; /* ← 最大幅を設定 (画面が広すぎても大丈夫なように) */
+        /* height: 842px; ← 高さの固定もやめた */
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+    }
+
+    .page {
+        position: relative;
+        width: 100%; /* ← ページの幅を画面に合わせるようにした */
+        /* min-height: 842px; */ /* 必要なら最低限の高さを指定 */
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+    /* === ここまで変更した部分 === */
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background: linear-gradient(45deg, var(--fashion-1), var(--fashion-5));
+        color: white;
+        flex-shrink: 0;
+    }
+
+    .title {
+        font-family: 'Kaisei Decol', serif;
+        font-size: 32px;
+        font-weight: bold;
+        background: linear-gradient(45deg, var(--fashion-2), var(--fashion-3));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .date {
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+    /* === ここから変更した部分 === */
+    .container {
+        display: flex;
+        /* flex-wrap: wrap; ← カラムが折り返さないようにコメントアウト */
+        padding: 15px;
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+
+    .column {
+        /* width: 33.333%; ← 固定の幅指定をやめた */
+        flex: 1;          /* ← カラムが幅を分け合うようにした */
+        min-width: 250px; /* ← カラムが最低でもこの幅は保つようにした (数字は調整可能) */
+        padding: 10px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    /* === ここまで変更した部分 === */
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(5px);
+        border: 1px dashed var(--fashion-1);
+        position: relative;
+        flex-shrink: 0;
+        display: flex; /* カード内の要素配置のために追加 */
+        flex-direction: column; /* カード内の要素を縦に積む */
+        flex-grow: 1; /* カラム内で高さが足りない場合に伸びるように */
+    }
+
+    .section-title {
+        font-family: 'Yomogi', cursive;
+        font-size: 18px;
+        color: var(--heading-color);
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid var(--fashion-3);
+        display: flex;
+        align-items: center;
+        flex-shrink: 0; /* タイトルの高さが変わらないように */
+    }
+
+    .section-title::before {
+        content: "✏️";
+        margin-right: 8px;
+    }
+
+    /* カード内のテキスト部分が可変の高さを持つように */
+    .card > p,
+    .card > .icon-box,
+    .card > .handdrawn-box,
+    .card > .note,
+    .card > .bubble,
+    .card > .banner,
+    .card > .bullet-item,
+    .card > .quote {
+         flex-shrink: 0; /* 基本的に高さは内容に合わせる */
+    }
+    /* 手書きボックスは中身が増えてもOK */
+    .handdrawn-box {
+        flex-grow: 1;
+    }
+
+
+    .highlight {
+        background: linear-gradient(transparent 60%, var(--fashion-2) 60%);
+        font-weight: bold;
+        padding: 0 2px;
+    }
+
+    .arrow {
+        position: absolute;
+        width: 40px;
+        height: 30px;
+        background-color: transparent;
+        border-right: 5px dashed var(--fashion-4);
+        border-bottom: 5px dashed var(--fashion-4);
+        transform: rotate(-45deg);
+        right: -20px;
+        bottom: 30px;
+        z-index: 2;
+    }
+
+    .note {
+        font-family: 'Kaisei Decol', serif;
+        font-size: 14px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 8px;
+        padding: 8px;
+        margin-top: 8px;
+        border-left: 3px solid var(--fashion-3);
+    }
+
+    .bubble {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 10px 15px;
+        margin: 10px 0;
+        position: relative;
+        border: 1px solid var(--fashion-1);
+    }
+
+    .bubble::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        border-width: 0 10px 10px;
+        border-style: solid;
+        border-color: var(--fashion-1) transparent;
+        z-index: 0;
+    }
+
+    .bubble::after {
+        content: "";
+        position: absolute;
+        top: -8px;
+        left: 21px;
+        border-width: 0 9px 9px;
+        border-style: solid;
+        border-color: rgba(255, 255, 255, 0.9) transparent;
+        z-index: 1;
+    }
+
+    .icon-box {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+    }
+
+    .icon {
+        font-size: 24px;
+        margin-right: 10px;
+        color: var(--fashion-4);
+    }
+
+    .handdrawn-box {
+        border: 2px dashed var(--fashion-1);
+        border-radius: 15px;
+        padding: 10px;
+        margin: 10px 0;
+        position: relative;
+    }
+
+    .banner {
+        background: linear-gradient(45deg, var(--fashion-3), var(--fashion-4));
+        color: white;
+        text-align: center;
+        padding: 5px 10px;
+        border-radius: 8px;
+        margin: 10px 0;
+        font-weight: bold;
+        transform: rotate(-2deg);
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .bullet-item {
+        display: flex;
+        align-items: flex-start;
+        margin: 8px 0;
+    }
+
+    .bullet {
+        min-width: 20px;
+        height: 20px;
+        background-color: var(--fashion-3);
+        border-radius: 50%;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: var(--fashion-1);
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+
+    .quote {
+        font-style: italic;
+        color: var(--fashion-1);
+        border-left: 3px solid var(--fashion-4);
+        padding-left: 10px;
+        margin: 10px 0;
+        font-size: 13px;
+    }
+
+    footer {
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 12px;
+        color: var(--fashion-1);
+        border-top: 1px dashed var(--fashion-1);
+        flex-shrink: 0;
+        margin-top: auto;
+    }
+
+    .squiggly-underline {
+        text-decoration: underline;
+        text-decoration-style: wavy;
+        text-decoration-color: var(--fashion-4);
+    }
+
+    .connection-line {
+        position: absolute;
+        border-top: 2px dashed var(--fashion-4);
+        width: 40px;
+        transform-origin: left center;
+    }
+
+    /* レスポンシブ対応（簡易） */
+    @media (max-width: 768px) { /* 少し広めの画面から縦積みに変更 */
+        body {
+            max-width: none;
+            padding: 10px;
+        }
+        .container {
+             flex-direction: column; /* カラムを縦に積む */
+             padding: 10px;
+        }
+        .column {
+            flex: none; /* flex均等割りをやめる */
+            width: 100%; /* 幅100%にする */
+            min-width: unset; /* 最小幅も解除 */
+            padding: 5px;
+        }
+        .title {
+            font-size: 24px;
+        }
+        header, footer {
+             padding: 10px 15px;
+        }
+    }
+</style></head>
+<body>
+    <div class="page">
+        <header>
+            <h1 class="title">努力が楽しくなる方法</h1>
+            <div class="date">2025年5月5日</div>
+        </header>
+
+        <div class="container">
+            <div class="column">
+                <div class="card">
+                    <h2 class="section-title">概要</h2>
+                    <p>スタンフォード大学の神経科学者、アンドリュー・ヒューバーマン氏によると、多くの人が努力を苦痛と感じる一方で、一部のエリートが努力を継続できる理由には科学的根拠があります。</p>
+                    <p>重要なのは<span class="highlight">脳の再配線</span>によって、誰でも<span class="highlight">努力を楽しめる</span>ようになれること。</p>
+                    <div class="icon-box">
+                        <span class="icon">🧠</span>
+                        <p>脳のドーパミンシステムを効果的に活用し、努力のプロセスそのものから喜びを得る方法を学びましょう。</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="section-title">努力は多くの人にとって苦痛</h2>
+                    <div class="bullet-item">
+                        <div class="bullet">1</div>
+                        <p>多くの人は努力そのものを楽しむより、目標達成や報酬（金銭、社会的承認など）を求めて努力します。</p>
+                    </div>
+
+                    <div class="quote">「ほとんどの人にとって努力は大変です。できることなら努力をせずに成果を得たいと考えるのが普通でしょう。」</div>
+
+                    <div class="bullet-item">
+                        <div class="bullet">2</div>
+                        <p>努力を継続できる人は稀であり、エリートはこの点で多くの人と異なります。</p>
+                    </div>
+
+                    <div class="bubble">
+                        <p>でも安心して！この違いは<span class="squiggly-underline">生まれつきではなく</span>、脳を後天的に組み替えることが可能です。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <h2 class="section-title">報酬への依存が努力の楽しさを奪う</h2>
+                    <div class="icon-box">
+                        <span class="icon">💊</span>
+                        <p><span class="highlight">ドーパミン</span>は目標達成や報酬獲得時に放出され、喜びや満足感をもたらします。</p>
+                    </div>
+
+                    <div class="handdrawn-box">
+                        <p>報酬を得ることに集中しすぎると：</p>
+                        <div class="bullet-item">
+                            <div class="bullet">!</div>
+                            <p>一時的に多くのドーパミンが分泌された後、同じ活動をしても楽しく感じられなくなる</p>
+                        </div>
+                        <div class="bullet-item">
+                            <div class="bullet">!</div>
+                            <p>活動そのものが楽しいからではなく、報酬のために行うという認識が生まれる</p>
+                        </div>
+                        <div class="bullet-item">
+                            <div class="bullet">!</div>
+                            <p>努力のプロセスそのものから喜びを感じにくくなる</p>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <p>スタンフォード大学の実験：幼児に絵を描かせる際、ご褒美を与えた後、ご褒美がなくなると自発的に絵を描く頻度が大幅に減少しました。</p>
+                    </div>
+
+                    <div class="quote">「つまり、報酬を得ることばかりに集中してしまうと、実際に行っている活動そのものからは喜びを感じにくくなるんです。」</div>
+                </div>
+
+                <div class="card">
+                    <h2 class="section-title">「成長マインドセット」の重要性</h2>
+                    <p>スタンフォード大学のキャロル・ドゥエック教授が提唱する<span class="highlight">成長マインドセット</span>とは：</p>
+
+                    <div class="bullet-item">
+                        <div class="bullet">✓</div>
+                        <p>まだ目標達成していなくても、そのための努力自体が重要だと考える考え方</p>
+                    </div>
+
+                    <div class="bullet-item">
+                        <div class="bullet">✓</div>
+                        <p>努力そのものに焦点を当て、優れた成果を上げることができる</p>
+                    </div>
+
+                    <div class="bullet-item">
+                        <div class="bullet">✓</div>
+                        <p>このマインドセットは誰でも育むことが可能</p>
+                    </div>
+
+                    <div class="banner">
+                        成長マインドセットを持つ人は、結果だけでなく<br>
+                        プロセスそのものから価値を見出せる！
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <h2 class="section-title">脳を再配線する具体的方法</h2>
+                    <p>重要なのは、<span class="highlight">努力をしている最中に喜びや達成感を感じ取れる</span>ようになること。</p>
+
+                    <div class="quote">「この大変なことをやって後で得られる目標のために努力すると考えると、現在取り組んでいるプロセスを楽しむことが減り、努力がより苦痛に感じられ、非効率になります。」</div>
+
+                    <div class="handdrawn-box">
+                        <h3 style="font-size: 16px; color: var(--fashion-5); margin-bottom: 8px;">最も重要な方法：</h3>
+                        <p>努力自体が自分にとって価値のあることだと自分に言い聞かせること。</p>
+
+                        <div class="icon-box">
+                            <span class="icon">🗣️</span>
+                            <p>たとえ辛くても、「それでも私は今この努力に集中しているんだ」と自分と対話する</p>
+                        </div>
+
+                        <div class="icon-box">
+                            <span class="icon">🔄</span>
+                            <p>「この反復練習が確実に自分の技術を積み上げている」と意識する</p>
+                        </div>
+
+                        <div class="icon-box">
+                            <span class="icon">🔥</span>
+                            <p>最も厳しい瞬間に「これはきつい。しかし、この辛さのおかげで達成感が得られ、これから先も努力が楽しくなる」と自分に言い聞かせる</p>
+                        </div>
+                    </div>
+
+                    <div class="bubble">
+                        <p>「私は<span class="squiggly-underline">自分の意志</span>でこれをやっている、<span class="squiggly-underline">好きでやっている</span>んだ」と自分に伝えることも重要です。</p>
+                    </div>
+
+                    <div class="quote">「苦しいものだと割り切って取り組むのも一つの方法ですが、時間を単に犠牲にするよりも、少しでも楽しみを見出せたり、喜びを感じられたら人生は好転するはずです。そのためには、この自己暗示が必要なんです。」</div>
+                </div>
+
+                <div class="card">
+                    <h2 class="section-title">結論</h2>
+                    <div class="icon-box">
+                        <span class="icon">🎯</span>
+                        <p>トップレベルのアスリートやビジネスマンは、努力の過程に喜びを見出す能力を持っています。</p>
+                    </div>
+
+                    <div class="icon-box">
+                        <span class="icon">💯</span>
+                        <p>努力そのものから喜びを感じられるようになることは、ドーパミンの最も強力な活用方法です。</p>
+                    </div>
+
+                    <div class="icon-box">
+                        <span class="icon">👍</span>
+                        <p>この方法は、限られたエリートだけでなく、私たち全員が習得できます。</p>
+                    </div>
+
+                    <div class="banner">
+                        本気で努力したい人は、努力そのものからドーパミンを<br>
+                        引き出すことを試みるべきです！
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            情報源：「神経科学者「シンプルだが、確実に努力が楽しくなる方法」アンドリュー・ヒューバーマン 和訳・解説」からの抜粋 | 作成：2025年5月5日
+        </footer>
+    </div>
+</body>
+</html>
